@@ -19,18 +19,19 @@ variable "instance_count" {
 variable "aws_subnet" {
   description = "AWS Subnet"
   type        = string
-  default     = "subnet-0414fde98fd6fd39b"
+  default     = "<SUBNET ID>"
 }
 
+# Run "az group list -otable" to get resource group name and resource group location
 variable "resource_group_name" {
   description = "Resource group name"
   type        = string
-  default     = "1-7e675ab3-playground-sandbox"
+  default     = "<RESOURCE GROUP NAME>"
 }
 
 
 variable "resource_group_location" {
   description = "Resource group Location"
   type        = string
-  default     = "westus"
+  default     = "<RESOURCE GROUP LOCATION>"
 }

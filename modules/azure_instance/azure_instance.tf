@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "rg" {
 # Creating Virtual Network
 resource "azurerm_virtual_network" "vnet" {
     name = "Vnet"
-    address_space = ["10.0.0.0/1"]
+    address_space = ["10.0.0.0/16"]
     location = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
 }
@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "nic" {
 # Creating Virtual Machine
 resource "azurerm_linux_virtual_machine" "vm" {
     count = var.instances
-    name = "GURU-${count.index}"
+    name = "ShehamAz-${count.index}"
     location = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
     network_interface_ids = [azurerm_network_interface.nic [count.index].id]
@@ -44,7 +44,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     
     admin_ssh_key {
     username = "cloud_user"
-    public_key = file("C:/Users/Terminal-PAPC12/Downloads/terraform_key/abc.pub")
+    public_key = file("<ENTER PATH>")
     }
     os_disk {
         caching = "ReadWrite"
@@ -52,9 +52,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
     }
 
     source_image_reference {
-      publisher = "Canonical"
-      offer = "Ubuntu"
-      sku = "18.04-LTS"
+    #   publisher = "Canonical"
+    #   offer = "UbuntuServer"
+    #   sku = "22.04-LTS"
+      offer                 = "0001-com-ubuntu-server-focal"
+      publisher             = "Canonical"
+      sku                   = "20_04-lts-gen2"
       version = "latest"
     }
 
